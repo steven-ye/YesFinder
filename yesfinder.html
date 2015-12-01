@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>YesFinder - Web File Mananger</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link href="skins/style.css" rel="stylesheet">
+<link href="skins/smartMenu.css" rel="stylesheet">
+<script src="js/jquery-1.11.1.min.js"></script>
+</head>
+
+<body>
+  <div id="yesfinder"></div>
+<script src="js/ajaxfileupload.js"></script>
+<script src="js/jquery-smartMenu-min.js"></script>
+<script src="js/yesfinder.js"></script>
+<script>
+$(function(){
+	$('#yesfinder').yesFinder();
+});  
+
+function yesfinder(e){
+	alert('yesfinder function is ok: '+e);
+}
+</script>
+</body>
+</html>
