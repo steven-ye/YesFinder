@@ -38,34 +38,29 @@
 	margin:8px;
 	padding:5px;
 }
+.yesFinder .fm-sidebar ul li{
+	padding-left: 16px;
+}
+.yesFinder .yes_folders a{
+	font-size:13px;
+	line-height:24px;
+	background:url(images/yesfolder.gif) no-repeat 10px;
+	padding-left:30px;
+}
+.yesFinder .yes_folders a:focus,.yesFinder .yes_folders a.active{
+	background-image:url(images/yesfolderopened.gif);
+	background-color: #D5D5D5;
+}
+.yesFinder .yes_folders a:hover{
+	background-color:#EEE!important;
+}
 .yesFinder .fm-sidebar li.root{
 	font-weight:600;
 	margin:0;
 	padding:0;
 }
-.yesFinder .fm-sidebar .root em{
-	color:#999;
-}
-.yesFinder .fm-sidebar h4>a{
-	background:none !important;
-	padding:3px 5px!important;
-}
-.yesFinder .fm-sidebar ul li{
-	padding-left: 15px;
-}
-.yesFinder .fm-sidebar a{
-	font-weight:300;
-	font-size:13px;
-	background:url(images/yesfolder.gif) no-repeat 10px;
-	padding:3px 10px 3px 30px;
-}
-.yesFinder .fm-sidebar a:focus,.yesFinder .fm-sidebar a.active{
-	background-image:url(images/yesfolderopened.gif);
-	background-color: #D5D5D5;
-}
-	
-.yesFinder .fm-sidebar a:hover{
-	background-color:#EEE!important;
+.yesFinder .fm-sidebar li.root a{
+	background-image:url(images/yeshome.png);
 }
 .yesFinder .fm-sidebar,.yesFinder .fm-toolbar,.yesFinder .fm-body{ /*圆角*/
 	border-radius: 3px;

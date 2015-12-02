@@ -32,7 +32,7 @@
 			var tpl ='<table cellpadding="0" cellspacing="0" border="0" width="100%">';
             tpl +='<tr><td width="20%"><div class="fm-sidebar">';
             tpl +='<h2>Folders</h2><ul class="yes_folders">';
-            tpl +='<li class="root"><a class="active" href="/"> /<em>(ROOT)</em></a></li>';
+            tpl +='<li class="root"><a class="active" href="/"> Home</a></li>';
             tpl +='<ul></ul>';
             tpl +='</ul></div></td><td width="80%">';
             tpl +='<div class="fm-header">';
