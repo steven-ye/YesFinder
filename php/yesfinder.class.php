@@ -32,18 +32,17 @@ class YesFinder{
 		}
 		$iconpath = 'skins/images/icons/64/';
 		$iconlist=scandir($iconpath);
-		array_shift($iconlist);array_shift($iconlist);
 		$i=0;
 		foreach($files as $file){
 			if(is_dir($file))continue;
 			$f = array();
-			$f['file'] = $file;
+			$f['file'] = iconv('GB2312','UTF-8',$file);
 			$f['filetype'] = substr(strrchr($file, "."), 1);
 			if(!empty($f['filetype'])&&in_array(strtolower($f['filetype']).'.png',$iconlist))
 			    $f['fileicon'] = $iconpath.$f['filetype'].'.png';
 			else
 			    $f['fileicon'] = $iconpath.'unknown.png';
-			$f['filename'] = substr(strrchr($file, "/"), 1);
+			$f['filename'] = substr(strrchr($f['file'], "/"), 1);
 			$f['filesize'] = round(filesize($file)/1024,2).' KB';
 			$f['filetime'] = date('Y-m-d H:i:s',filemtime($file));
 			
@@ -53,22 +52,15 @@ class YesFinder{
 		return $return;
 	}
 	
-	function folders($path=''){
-		return $this->findFolders($this->BaseUrl);
-	}
-	
-	function findFolders($dir=''){
-		$return =array(); 
-		if(!is_dir($dir))return array();
-		$dir=rtrim($dir,'/');
-		$files = glob($dir.'/*',GLOB_ONLYDIR);
-		$i=0;
+	function folders($path='/'){
+		$dir = $this->BaseUrl.'/'.trim($path,'/');
+		$files = scandir($dir);
+		$i=0; $return = array();
 		foreach($files as $file){
-			//if(is_dir($file)){
-				$return[$i]['name']=str_replace(dirname($file).'/','',$file);
-				$return[$i]['path']=str_replace($this->BaseUrl,'',$file);
-				$return[$i]['son']=$this->findFolders($file);
-			//}
+			if($file=='.'||$file=='..'||!is_dir($dir.'/'.$file))continue;
+			$return[$i]['name']=$file;
+			$return[$i]['path']=rtrim($path,'/').'/'.$file;
+			$return[$i]['son']=$this->folders(rtrim($path,'/').'/'.$file);
 			$i++;
 		}
 		return $return;
@@ -113,7 +105,6 @@ class YesFinder{
 		$return['error']="The folder '{$path}' isn't existed.";
 		return $return;
 	}
-	
 	function upload($path=''){
 		$path = $this->BaseUrl.'/'.trim($path,'/');
 		if(!is_dir($path)){

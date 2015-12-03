@@ -2,7 +2,7 @@
 * YesFinder v0.9
 * Steven Ye
 * Email: steven_ye@foxmail.com
-* Date : 2015-11-30
+* Date : 2015-12-02
 */
 ;(function($, window, document,undefined) {
     //定义构造函数
@@ -23,8 +23,8 @@
     YesFinder.prototype = {
         init: function() {
 			this.loadTpl();
-			this.showFolders(); 
-			this.showFiles();
+			this.loadMenu();
+			this.loadFolders(); 
 			return this;
         },
 		loadTpl:function (){
@@ -41,10 +41,10 @@
             tpl +='</div>';
             tpl +='<div class="fm-body">';
             tpl +='   <div id="loading"></div><input type="file" id="upfile" name="upfile" />';
-			tpl +='   <div id="yes_input_div">New Name: <input type="text" id="yes_target"/> ';
-			tpl +='     <span id="yes_ext"></span>';
-			tpl +='     &nbsp; <input type="button" id="yes_btn_ok" value="Add"/>';
-			tpl +='  	<input type="hidden" id="yes_origin" />';
+			tpl +='   <div class="yes_input_div">New Name: <input type="text" class="yes_target"/> ';
+			tpl +='     <span class="yes_ext"></span>';
+			tpl +='     &nbsp; <input type="button" class="yes_btn_ok" value="Add"/>';
+			tpl +='  	<input type="hidden" class="yes_origin" />';
 			tpl +='   </div><div class="yes_files"></div>';
             tpl +='</div></td></tr></table>';
 			
@@ -55,7 +55,6 @@
                 $('.yesFinder .fm-sidebar').css('height',$(this).height()-30+'px');
 				$('.yesFinder .fm-body').css('height',$(this).height()-95+'px');
             });
-			this.loadMenu();
 			
 			this.$ele.find('.fm-body').smartMenu([
 			      [{text:'Upload',func:function(){that.upload();}},
@@ -66,7 +65,7 @@
 		loadMenu: function(){
 			var that=this;
 			var menu={
-				  View:function(){that.view();},
+				  View:function(){that.view(that.file);},
 			      Upload:function(){that.upload();},
 				  Refresh:function(){that.refresh();},
 				  Delete:function(){that.delete(that.file);},
@@ -96,7 +95,7 @@
 				});
 			});
 		},
-		showFolders: function(){
+		loadFolders: function(){
 			var that=this,data = this.getData('folders','/');
 			
 			if(data.error){
@@ -108,18 +107,18 @@
 				  [{
                     text: "New Folder",
 	                func: function(){
-			            $('#yes_origin').val($(this).attr('href'));
-						$('#yes_target').val('');
-						$('#yes_ext').text('');
-				        $('#yes_btn_ok').val('New Folder');
-				        $('#yes_input_div').show();
-						$('#yes_btn_ok').unbind();
-			            $('#yes_btn_ok').click(function(){
-							var path = $('#yes_origin').val();
-				            var newname = $('#yes_target').val();
+			            $('.yes_origin',this.$ele).val($(this).attr('href'));
+						$('.yes_target',this.$ele).val('');
+						$('.yes_ext',this.$ele).text('');
+				        $('.yes_btn_ok',this.$ele).val('New Folder');
+				        $('.yes_input_div',this.$ele).show();
+						$('.yes_btn_ok',this.$ele).unbind();
+			            $('.yes_btn_ok',this.$ele).click(function(){
+							var path = $('.yes_origin',this.$ele).val();
+				            var newname = $('.yes_target',this.$ele).val();
 				            if(!newname)return alert('Please input a newname.');
 				            if(!path)return alert('Please choose a folder first.');
-							$('#yes_input_div').hide();
+							$('.yes_input_div',this.$ele).hide();
 				            that.newFolder(path,newname);
 			            });
 						
@@ -127,24 +126,21 @@
 		          },{
 					text: "Rename",
 	                func: function(){
-			            if($(this).attr('href')=='/')return;
-						$('#yes_origin').val($(this).attr('href'));
-				        var tmp = $(this).attr('href').split('/');
-				        var name = tmp.length>1?tmp[tmp.length-1]:tmp[0];
-				        $('#yes_target').val(name);
-				        $('#yes_ext').text('');
-				        $('#yes_btn_ok').val('Rename Folder');
-				        $('#yes_input_div').show();
-						$('#yes_btn_ok').unbind();
-			            $('#yes_btn_ok').click(function(){
-				            var oldname = $('#yes_origin').val();
-				            var newname = $('#yes_target').val();
+			            if($(this).attr('href')==='/')return;
+						var oldname=$(this).attr('href');
+				        var name = oldname.substr(oldname.lastIndexOf("/")).replace('/','');
+				        $('.yes_target',this.$ele).val(name);
+				        $('.yes_ext',this.$ele).text('');
+				        $('.yes_btn_ok',this.$ele).val('Rename Folder');
+				        $('.yes_input_div',this.$ele).show();
+						$('.yes_btn_ok',this.$ele).unbind();
+			            $('.yes_btn_ok',this.$ele).click(function(){
+				            //var oldname = $('.yes_origin',this.$ele).val();
+				            var newname = $('.yes_target',this.$ele).val();
 				            if(!newname)return alert('Please input a newname.');
 				            if(!oldname)return alert('Please choose a folder first.');
-				            $('#yes_input_div').hide();
+				            $('.yes_input_div',this.$ele).hide();
 							that.rename(oldname,newname,1);
-							that.showFolders();
-							
 			            });
 					}
 				  },{
@@ -158,18 +154,19 @@
 				$('.yes_folders a',this.$ele).each(function(){
 					$(this).click(function(e){
 						that.folder = $(this).attr('href');
-						that.showFiles();
+						that.loadFiles();
 						that.file='';
 						$('.yes_folders a.active',this.$ele).removeClass('active');
 	    				$(this).addClass('active');
 						e.preventDefault();
 					});
 					$(this).smartMenu(menuData,{name:'folders',textLimit:18}); //自定义右键
+					if($(this).attr('href')===that.folder)$(this).click();
 				});
 				
 			}
 		},
-		showFiles: function(){
+		loadFiles: function(){
 			var tpl='',num=0,that=this; 
 			var data = this.getData('files',this.folder); 
 			if(this.folder&&this.folder!='/')path=this.folder+'/';
@@ -243,21 +240,19 @@
                 [{
     	           text: "Rename",
     	           func: function() {
-			           $('#yes_origin').val($(this).attr('href'));
-				       var tmp = $(this).attr('href').split('/');
-				       var origin = tmp[tmp.length-1];
+			           var oldname = $(this).attr('href');
+				       var origin = oldname.substr(oldname.lastIndexOf("/")).replace('/','');
 				       var name = origin.replace(/\..+$/i,'');
-				       var ext = origin.match(/\..+$/i);
+				       var ext = origin.substr(origin.lastIndexOf("."));
 				       if(!ext)ext='';
-				       $('#yes_target').val(name);
-				       $('#yes_ext').text(ext);
-				       $('#yes_btn_ok').val('Rename');
-				       $('#yes_input_div').show();
-				       $('#yes_btn_ok').unbind();
-			           $('#yes_btn_ok').click(function(){
-				           $('#yes_input_div').hide();
-						   var oldname = $('#yes_origin').val();
-				           var newname = $('#yes_target').val();
+				       $('.yes_target',this.$ele).val(name);
+				       $('.yes_ext',this.$ele).text(ext);
+				       $('.yes_btn_ok',this.$ele).val('Rename');
+				       $('.yes_input_div',this.$ele).show();
+				       $('.yes_btn_ok',this.$ele).unbind();
+			           $('.yes_btn_ok',this.$ele).click(function(){
+				           $('.yes_input_div',this.$ele).hide();
+				           var newname = $('.yes_target',this.$ele).val();
 				           if(!oldname){alert('Please choose a file first.');}
 						   else if(!newname){alert('Please input a new name.');}
 						   else if(newname==name){alert('The name is same');}
@@ -310,7 +305,7 @@
 			if(data.error){
 				alert(data.error);
 			}else if(data){
-				this.showFolders();
+				this.loadFolders();
 				alert('The new folder is done.');
 			}else{
 				alert('Failed to make the new folder.');
@@ -324,7 +319,7 @@
 			if(data.error){
 				alert(data.error);
 			}else if(data){
-				this.showFolders();
+				this.loadFolders();
 				alert('The folder is deleted.');
 			}else{
 				alert('Failed to delete the folder.\nThere may be some files and/or folders in it.');
@@ -354,10 +349,6 @@
 		delete: function(path){
 			if(!path){return alert('Please choose a file first.');}
 			if(!confirm('Are you sure to delete this file: '+path+' ?'))return;
-			var filename,tmp = Array();
-			tmp = path.split('/');
-			filename = tmp[tmp.length-1];
-			path = this.folder+filename; 
 			var data = this.getData('delete',path);
 			if(data.error){
 				alert(data.error);
@@ -371,7 +362,7 @@
 			if(data.error){
 				alert(data.error);
 			}else if(data){
-				this.refresh();
+				action = folder ? this.loadFolders():this.refresh();
 				alert("Rename is done");
 			}else{
 				alert('Failed to rename it');
@@ -386,17 +377,17 @@
 			    alert("The file '"+path+" doesn't exist.");
 		},
 		refresh : function(){
-			this.showFiles();
+			this.loadFiles();
 			$('#yes_input_div').hide();
 			$('#yes_origin').val('');
 		},
 		select : function(path){
 			if(this.callback){
 				this.callback(path);
-			}else if(parent.yesfinder){
-			    parent.yesfinder(path);
-			}else{
-				alert('You choose the file: '+path);
+			}else if(yesfinder&&typeof(yesfinder)==='function'){
+			    yesfinder(path);
+			}else if(parent.yesfinder&&typeof(parent.yesfinder)==='function'){
+				parent.yesfinder(path);
 			}
 		},
 		getData: function(action,path){
@@ -443,7 +434,7 @@
     //在插件中使用对象
     $.fn.yesFinder = function(options,callback) {
         //创建实体
-		if(typeof(options)=="function"){
+		if(typeof(options)==="function"){
 			callback = options;
 			options={};
 		}

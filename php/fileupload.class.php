@@ -226,7 +226,7 @@
 			if(!$this->errorNum) {
 				$path = rtrim($this->path, '/').'/';
 				$path .= $this->newFileName;
-				if (@move_uploaded_file($this->tmpFileName, $path)) {
+				if (@move_uploaded_file($this->tmpFileName, iconv('UTF-8','GB2312',$path))) {
 					return true;
 				}else{
 					$this->setOption('errorNum', -3);

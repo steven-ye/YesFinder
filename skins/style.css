@@ -226,17 +226,17 @@
 .yesFinder input[type=file]{
 	display:none
 }
-.yesFinder #yes_input_div{
+.yesFinder .yes_input_div{
 	display:block none;
 	padding: 5px;
 	margin-bottom: 5px;
 	display:none;
 }
-.yesFinder #yes_target{
+.yesFinder .yes_target{
 	padding:3px 8px;
 	font-size:13px;
 }
-.yesFinder #yes_ext{
+.yesFinder .yes_ext{
 	width:20px;
 	display:inline-block
 }
