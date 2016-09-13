@@ -4,7 +4,7 @@
 
 ###功能上的主要改进是可以双击改文件/目录名称，还有就是选项增加了
 
-modal:true, 
+ modal:true, 
  delBtn:true,
  delBtn:function(){
     //do something
@@ -14,17 +14,17 @@ modal:true,
 
  具体用法：
 
-$(function(){
-     $('#normal').YesFinder({modal:true},function(file,finder){
+ $(function(){
+    $('#normal').YesFinder({modal:true},function(file,finder){
         finder.alert('你选择的文件是 "'+file+'"');
-     });
-     $('#modal').YesFinder({modal:true,width:900,height:600},function(file,finder){
+    });
+    $('#modal').YesFinder({modal:true,width:900,height:600},function(file,finder){
          file = finder.baseUrl + file;
          console.log(file);
          this.find('img')[0].src = file;
          finder.YesModal.hide();
      });
-         $('#delBtn').YesFinder({
+     $('#delBtn').YesFinder({
          modal:true,
          delBtn:true,
          delBtnClick:function(finder){
