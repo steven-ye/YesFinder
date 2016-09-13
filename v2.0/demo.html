@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>YesFinder - Web File Mananger</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="skins/YesFinder-full.css" rel="stylesheet" type="text/css">
+    <script src="jQuery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="YesFinder-full.js" type="text/javascript"></script>
+    <style>
+        .img{
+            margin:0;
+            padding:0;
+            width:150px;
+            height:150px;
+            line-height: 150px;
+            background-color: #eee;
+            border:1px solid #999;
+            text-align: center;
+            display:inline-block;
+            overflow: hidden;
+        }
+        .img img{
+            margin-top: -4px;
+            max-width:100%;
+            max-height:100%;
+            border:none;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+  <h4>普通点击打开</h4>
+  <p><a id="normal" href="#" title="普通打开">打开YesFinder</a></p>
+  <h4>点击图片，双击后选取文件并替换，自定义尺寸</h4>
+  <p><a id="modal" class="img" href="#" title="点击打开"><img src="uploads/2015-03-19 07.jpeg" alt="图片"/></a></p>
+  <h4>鼠标悬停后可删除图片，自定义删除操作</h4>
+  <p><a id="delBtn" class="img" href="#" title=""><img src="uploads/2015-03-19 07.jpeg" alt="图片"/></a></p>
+  <h4>iFrame框全屏展示,尺寸随iFrame大小变化 <small><a href="fullscreen.html" target="_blank">直观展示全屏</a></small></h4>
+  <iframe src="fullscreen.html" width="620" height="400" frameborder="0"></iframe>
+  <iframe src="fullscreen.html" width="900" height="680" frameborder="0"></iframe>
+<script>
+$(function(){
+	$('#normal').YesFinder({modal:true},function(file,finder){
+			/*You can put your code here to do something.*/
+			finder.alert('你选择的文件是 "'+file+'"');
+	    });
+    $('#modal').YesFinder({modal:true,width:900,height:600},function(file,finder){
+        file = finder.baseUrl + file;
+        console.log(file);
+        this.find('img')[0].src = file;
+        finder.YesModal.hide();
+    });
+	$('#delBtn').YesFinder({
+        modal:true,
+        delBtn:true,
+        delBtnClick:function(finder){
+            this.find('img').attr('src','nopic.gif');
+        }
+    },function(file,finder){
+        file = finder.baseUrl + file;
+        this.find('img')[0].src = file;
+        finder.YesModal.hide();
+	});
+});
+</script>
+</body>
+</html>
