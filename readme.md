@@ -1,7 +1,7 @@
-YesFinder - Web File Manager V2.0
-====================================
-从界面到功能进行了全面升级，V2.0使用更方便，更安全。详见DEMO。
-------------------------------------
+#YesFinder - Web File Manager V2.0
+
+###从界面到功能进行了全面升级，V2.0使用更方便，更安全。详见DEMO。
+
 
 
 1. ####功能上的主要改进是可以双击改文件/目录名称，还有就是选项增加了
@@ -10,12 +10,12 @@ YesFinder - Web File Manager V2.0
     delBtn:true,
     delBtn:function(){
       //do something
-    }，
+    }
 
  这使用使用方式更加多样，方便用于不同场景。
 
  具体用法：
-
+ 
     $(function(){
       $('#normal').YesFinder({modal:true},function(file,finder){
          finder.alert('你选择的文件是 "'+file+'"');
