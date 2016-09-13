@@ -16,28 +16,28 @@
 
  具体用法：
  
-    $(function(){
-      $('#normal').YesFinder({modal:true},function(file,finder){
-         finder.alert('你选择的文件是 "'+file+'"');
-      });
-      $('#modal').YesFinder({modal:true,width:900,height:600},function(file,finder){
-         file = finder.baseUrl + file;
-         console.log(file);
-         this.find('img')[0].src = file;
-         finder.YesModal.hide();
-      });
-      $('#delBtn').YesFinder({
-         modal:true,
-         delBtn:true,
-         delBtnClick:function(finder){
-             this.find('img').attr('src','nopic.gif');
-         }
-       },function(file,finder){
-         file = finder.baseUrl + file;
-         this.find('img')[0].src = file;
-         finder.YesModal.hide();
-       });
-    });
+		$(function(){
+			$('#normal').YesFinder({modal:true},function(file,finder){
+				finder.alert('你选择的文件是 "'+file+'"');
+			});
+    		$('#modal').YesFinder({modal:true,width:900,height:600},function(file,finder){
+        		file = finder.baseUrl + file;
+        		console.log(file);
+        		this.find('img')[0].src = file;
+        		finder.YesModal.hide();
+    		});
+    		$('#delBtn').YesFinder({
+        		modal:true,
+        		delBtn:true,
+        		delBtnClick:function(finder){
+            		this.find('img').attr('src','nopic.gif');
+        		}
+    		},function(file,finder){
+        		file = finder.baseUrl + file;
+        		this.find('img')[0].src = file;
+        		finder.YesModal.hide();
+    		});
+    	});
  
 2. ####界面及交互更加人性化。
     为此，专门写了YesModal（模态框）和YesContextMenu（右键菜单）2个插件，这2个插件可以单独使用。
