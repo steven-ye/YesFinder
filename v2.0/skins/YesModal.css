@@ -1,0 +1,116 @@
+/**弹窗**
+* YesModal v1.0
+* Author: Steven Ye
+* Email: steven_ye@foxmail.com
+* Date: 2016-5-31
+*/
+.YesModal-on{
+    position:relative;
+}
+.YesModal{
+    margin:0;
+    padding:0;
+    background:none;
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    text-align: center;
+    z-index: 99;
+}
+.YesModal .cover {
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    display:block;
+    background-color:#000;
+    filter:alpha(opacity=50); /*IE滤镜，透明度50%*/
+    -moz-opacity:0.50; /*Firefox私有，透明度50%*/
+    opacity:0.50;/*其他，透明度50%*/
+}
+.YesModal .modal-dialog{
+    margin:0;
+    -moz-border-radius: 5px;      /* Gecko browsers */
+    -webkit-border-radius: 5px;   /* Webkit browsers */
+    border-radius:5px;            /* W3C syntax */
+    -moz-box-shadow:3px 3px 1px #444;
+    -webkit-box-shadow:3px 3px 1px #444;
+    box-shadow:3px 3px 1px #444;
+    background-color:#fff;
+    position:absolute;
+    top:50px;
+}
+.YesModal .modal-body{
+    margin:0;
+    padding:0;
+    width:100%;
+    display:block;
+    overflow-y:auto;
+}
+.YesModal .modal-header,.YesModal .modal-footer{
+    line-height:28px;
+    padding: 5px;
+    display: block;
+}
+.YesModal .modal-header{
+    border-bottom:2px solid #D5D5D5;
+    -moz-border-radius: 5px 5px 0 0;      /* Gecko browsers */
+    -webkit-border-radius: 5px 5px 0 0;   /* Webkit browsers */
+    border-radius: 5px 5px 0 0;            /* W3C syntax */
+    font-size:16px;
+    background-color:#F1F5F5;
+    color:#999;
+    position:relative;
+}
+.YesModal .modal-footer{
+    border-top:1px solid #D5D5D5;
+    -moz-border-radius: 0 0 5px 5px;      /* Gecko browsers */
+    -webkit-border-radius: 0 0 5px 5px;   /* Webkit browsers */
+    border-radius: 0 0 5px 5px;            /* W3C syntax */
+    background-color:#f0f0f0;
+    text-align: right;
+}
+
+.YesModal .up-table td, .YesModal .up-table th {
+    margin:0;
+    padding:2px 5px;
+    text-align: left;
+}
+.YesModal .close{
+    margin:0 auto;
+    padding:0;
+    font:25px/1em Verdana,Arial,sans-serif;
+    color:#aaa;
+    position:absolute;
+    top:3px;
+    right:5px;
+    cursor:pointer;
+}
+.YesModal .close:hover{
+    color:#F00;
+}
+
+.YesModal button{
+    color:#666;
+    font-weight:bold;
+    border:1px solid #ccc;
+    background-color:#D8E7E6;
+}
+.YesModal .modal-footer button{
+    margin:0 10px;
+    line-height:24px;
+}
+.YesModal button:hover{
+    color:#444;
+    background-color: #E5EFFD;
+    border-color:#348CCC;
+}
+.YesModal img{
+    max-width:100%;
+    max-height: 600px;
+    vertical-align:middle;
+}

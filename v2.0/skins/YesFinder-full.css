@@ -1,10 +1,15 @@
 @charset "utf-8";
 /*
-* YesFinder v2.0
-* Steven Ye
+* YesFinder v2.0.2
+* Author: Steven Ye
 * Email: steven_ye@foxmail.com
 * Date: 2016-6-12
 */
+.YesFinder *{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 .YesFinder,.YesFinder>table, .YesFinder>table>td{
 	margin:0;
 	padding:0;
@@ -51,6 +56,7 @@
 	background-color:#F1F5F5;
 	vertical-align:top;
 	height:465px;
+    overflow-y: auto;
 }
 .YesFinder .fm-header{
     background-color:#F1F5F5;
@@ -62,9 +68,6 @@
     padding:5px;
     height: 560px;
     background-color:#F1F5F5;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
     overflow-y: auto;
 }
 .YesFinder .fm-sidebar h2{
@@ -283,10 +286,11 @@
     font-size: 20px;
     line-height: 20px;
     cursor: pointer;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #fff;
 	position: absolute;
 	top: 0;
 	right:0;
-    text-shadow: 1px 1px 1px #fff;
 }
 .delBtn:hover{
     color:#f00;
@@ -300,10 +304,10 @@
 .red{color:#f00}
 
 /**弹窗**
-* YesModal v1.0
+* YesModal v1.0.1
 * Author: Steven Ye
 * Email: steven_ye@foxmail.com
-* Date: 2016-5-31
+* Date: 2016-09-19
 */
 .YesModal-on{
     position:relative;
@@ -417,23 +421,23 @@
 }
 
 /**右键菜单**
-* YesContextMenu v1.0
+* YesContextMenu v1.0.1
 * Author: Steven Ye
 * Email: steven_ye@foxmail.com
-* Date: 2016-5-31
+* Date: 2016-09-19
 */
 .contextmenu{
+    display: none;
 	margin:0;
 	padding:0;
-	display: none;
-	background: #f5f5f5;
-	position:absolute;
-	z-index:88;
-	cursor:default;
-    text-align: left;
+    background: #f5f5f5;
     font-weight:normal;
     font-size: 12px;
     font-family: Arial, sans-serif;
+    text-align: left;
+    cursor:default;
+	position:fixed;
+	z-index:101;
 }
 .contextmenu ul{
 	margin:0;

@@ -1,0 +1,303 @@
+@charset "utf-8";
+/*
+* YesFinder v2.0
+* Steven Ye
+* Email: steven_ye@foxmail.com
+* Date: 2016-6-12
+*/
+.YesFinder,.YesFinder>table, .YesFinder>table>td{
+	margin:0;
+	padding:0;
+}
+.YesFinder {
+	display: block;
+	background-color:#F0F0F0;
+	font:11px/1.3em Arial,Verdana,"Courier New",sans-serif;
+	width:100%;
+	text-align: left;
+	overflow: hidden;
+}
+.YesFinder img{
+	vertical-align:middle;
+	border: none;
+}
+.YesFinder h3{
+	font-size:16px;
+	color:#000;
+	background:none;
+}
+.YesFinder a{
+	display:block;
+	text-decoration:none;
+	color:#222;
+}
+.YesFinder ul{
+	margin:0;
+	padding: 0;
+	list-style:none;
+}
+.YesFinder td{
+	vertical-align:top;
+}
+.YesFinder .fm-sidebar, .YesFinder .fm-header,.YesFinder .fm-body,.YesFinder .statusbar{
+	display: block;
+	border:1px solid #999;
+	margin:2px;
+}
+.YesFinder .fm-sidebar:hover,.YesFinder .fm-body:hover,.YesFinder .fm-header:hover{
+	border-color:#06F;
+}
+.YesFinder .fm-sidebar{
+	background-color:#F1F5F5;
+	vertical-align:top;
+	height:465px;
+	overflow-y: auto;
+    overflow-x: visible;
+}
+.YesFinder .fm-header{
+	background-color:#F1F5F5;
+	line-height: 30px;
+	height:35px;
+}
+.YesFinder .fm-body{
+	margin-top:5px;
+	padding:5px;
+	height: 560px;
+	background-color:#F1F5F5;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.YesFinder .fm-sidebar h2{
+	font-size:20px;
+	font-weight:600;
+	margin:8px;
+	padding:5px;
+}
+.YesFinder .statusbar{
+	color:#666;
+	line-height:30px;
+}
+.YesFinder .folders ul{
+	padding-left: 15px;
+}
+.YesFinder .folders li a{
+	display: block;
+	line-height:1.8em;
+	background:url(../images/yesfolder.gif) no-repeat 3px;
+	padding-left:30px;
+	padding-right:3px;
+	font-size:13px;
+}
+.YesFinder .folders li a:focus,.YesFinder .folders li a.active{
+	background-image:url(../images/yesfolderopened.gif);
+	background-color: #D5D5D5;
+}
+.YesFinder .folders a:hover{
+	background-color:#EEE;
+}
+.YesFinder .folders>li>a,.YesFinder .folders>li>a:hover,.YesFinder .folders>li>a.active{
+	font-weight:600;
+	background-image:url(../images/yeshome.png);
+}
+
+.YesFinder .fm-header .fm-toolbar{
+	display:inline-block;
+	padding:2px;
+}
+.YesFinder .fm-header>p{
+	margin:0 auto;
+	padding:0 10px;
+	display:inline-block;
+	font-weight:600;
+	color:#555;
+}
+.YesFinder .fm-toolbar>li{
+	display:inline-block;
+	position:relative;
+	padding:0 5px 0 22px;
+	background-repeat:no-repeat;
+	background-position:2px 8px;
+	cursor:default;
+}
+.YesFinder .fm-toolbar>li.view{
+	background-image:url(../images/toolbar/view.gif);
+}
+.YesFinder .fm-toolbar>li.upload{
+	background-image:url(../images/toolbar/add.gif);
+}
+.YesFinder .fm-toolbar>li.refresh{
+	background-image:url(../images/toolbar/refresh.gif);
+}
+.YesFinder .fm-toolbar>li.delete{
+	background-image:url(../images/toolbar/delete.gif);
+}
+.YesFinder .fm-toolbar>li.download{
+	background-image:url(../images/toolbar/download.gif);
+}
+.YesFinder .fm-toolbar>li.settings{
+	background-image:url(../images/toolbar/settings.gif);
+}
+.YesFinder .fm-toolbar>li.help{
+	background-image:url(../images/toolbar/help.gif);
+}
+.YesFinder .fm-toolbar li:hover{
+	background-color:#D8E7E6;
+	border-radius: 3px;
+}
+.YesFinder .fm-toolbar li>ul,.YesFinder .fm-toolbar li>div{
+	position: absolute;
+	top: 30px;
+	left:0;
+	border:1px solid #666;
+	padding: 0;
+	background-color:#F1F5F5;
+	-webkit-box-shadow: 3px 3px 3px;
+	-moz-box-shadow: 3px 3px 3px;
+	box-shadow: 3px 3px 3px;
+	display:none;
+	z-index:99;
+}
+.YesFinder .fm-toolbar li:hover>ul,.YesFinder .fm-toolbar li:hover>div{
+	display:block;
+}
+.YesFinder .fm-toolbar li ul li{
+	width: 180px;
+	padding: 0 10px;
+}
+.YesFinder .fm-toolbar li ul li label{
+	width:100%;
+	display:block;
+	margin:0;
+}
+.YesFinder .fm-toolbar li ul li:hover{
+	background-color:#D8E7E6;
+}
+
+.YesFinder .fm-toolbar li a{
+	line-height:20px;
+	padding:5px;
+	display:block;
+}
+.YesFinder .fm-toolbar li>div{
+	width: 200px;
+	padding:10px;
+}
+.YesFinder .fm-toolbar a:hover{
+	background-color:#D8E7E6;
+	border-radius: 3px;
+}
+.YesFinder .files>li{
+	display:inline-block;
+	margin: 4px;
+	vertical-align:top;
+	color:#444;
+	font-size:10px;
+	font-weight: normal;
+	width:102px;
+	position:relative;
+}
+.YesFinder .files>li:hover{
+	background-color:#D8E7E6;
+}
+.YesFinder .files > li:focus,
+.YesFinder .files > li.active{
+	background-color:#D8E7E6;
+}
+.YesFinder .files>li p{
+	margin:0 auto;
+	padding: 0;
+	color:#999;
+	word-wrap:break-word;
+	text-align:center;
+}
+.YesFinder .files > li .fileicon{
+	margin:0;
+	padding:0;
+	border:1px solid #ddd;
+	background-color:#FFF;
+	height:100px;
+	line-height:100px;
+	text-align:center;
+	vertical-align:middle;
+	overflow: hidden;
+}
+.YesFinder .files > li .fileicon img{
+	margin-top: -2px;
+	max-height:100%;
+	max-width: 100%;
+	vertical-align:middle;
+}
+.YesFinder .files > li .filename{
+	color:#000;
+	margin:5px 0;
+}
+.YesFinder .files > li > .icon{
+	margin:0;
+	padding:0;
+	width:32px;
+	height:32px;
+	background:url(../images/checked.png) no-repeat;
+	border:none;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	-moz-opacity: 1;
+	opacity: 1;
+	position: absolute;
+	top:1px;
+	right:1px;
+	display: none;
+}
+.YesFinder .files > li.active > .icon{
+	display: block;
+}
+.YesFinder .files > li:hover > .fileicon,
+.YesFinder .files > li.active > .fileicon{
+	border-color: #348CCC;
+}
+.YesFinder .files > li textarea{
+	font-family: Arial,Verdana, sans-serif;
+}
+.YesFinder input[type=file]{
+	display:none
+}
+.YesFinder input[type=text]{
+	padding:3px 8px;
+	font-size:16px;
+	width: 200px;
+	border:1px solid #ddd;
+	height:25px;
+}
+.YesFinder input[type=text]+span{
+	margin-right:10px;
+	display:inline-block
+}
+.del-on{
+	position:relative;
+}
+.delBtn{
+	display: none;
+	color: #f69;
+	padding: 2px;
+	font-family: Verdana, sans-serif;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 20px;
+	cursor: pointer;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px #fff;
+	position: absolute;
+	top: 0;
+	right:0;
+}
+.delBtn:hover{
+	color:#f00;
+}
+.YesFinder .fl{float:left;}
+.YesFinder .fr{float:right}
+.clearfix{clear:both;}
+.text-right{text-align:right;  }
+.text-center{text-align:center;  }
+.mute{color: #D0D0D0;}
+.red{color:#f00}
