@@ -1,9 +1,9 @@
 /*
- * YesFinder v2.0.2
+ * YesFinder v2.0.3
  * Steven Ye
  * Email: steven_ye@foxmail.com
  * 依赖 YesModal 和 YesContextMenu 插件
- * Date: 2016-9-19
+ * Date: 2016-9-20
  * MIT License
  */
 ;(function($, window, document,undefined) {
@@ -55,7 +55,7 @@
                     e.preventDefault();
                     return false;
                 });
-                this.YesModal = $.YesModal('body',{width:options.width,height:options.height});
+                this.YesModal = $.YesModal({width:options.width,height:options.height});
                 this.YesModal.title.html('YesFinder - Web File Manager');
                 this.YesModal.body.html($finder);
                 this.YesModal.footer.hide();
@@ -97,8 +97,7 @@
                     $finder.find('.fm-body').eq(0).css('height',wh-82);
                 });
             }
-            //this.modal = $finder.YesModal().data['YesModal'];
-            this.modal= $.YesModal($finder);
+            this.modal= $.YesModal({},$finder);
             if(!$finder.YesContextMenu){
                 $finder.find('.fm-body').prepend('<p class="text-center mute">YesFinder缺少YesContextMenu自定义右键插件，部分功能无法使用。</p>');
             }
@@ -538,17 +537,18 @@
 })(jQuery, window, document);
 
 /*
- * YesModal v1.0.1
+ * YesModal v1.1
  * Steven Ye
  * Email: steven_ye@foxmail.com
- * Date: 2016-9-19
+ * Date: 2016-9-20
  */
 
 (function($, window, document,undefined) {
     var defaults = {
         width:600,
         height:300,
-        title:'',
+        title:'YesModal',
+        movable: true,
         btnOkayTxt:'确认',
         btnCancelTxt:'取消',
         okayClick:function(e){this.hide();},
@@ -584,6 +584,7 @@
             if(this.options.footer)this.footer.html(this.options.footer);
             this.resize(w,h);
             $(window).resize(function(){that.resize(w,h);});
+            if(this.options.movable)this.move();
             return this;
         },
         resize: function(w,h){
@@ -601,6 +602,36 @@
             }
             return this;
         },
+        move:function(){
+            var dialog = this.dialog,
+                movable = false,
+                ox,oy;
+            this.header.css({cursor:'move'});
+            this.header.mousedown(function(e){
+                ox = e.pageX-parseInt(dialog.css('left'));
+                oy = e.pageY-parseInt(dialog.css('top'));
+                movable = true;
+            }).mouseup(function(){
+                moveable = false;
+            });
+            this.modal.mousemove(function(e){
+                if(movable){
+                    var x=e.pageX-ox,
+                        y=e.pageY-oy;
+
+                    if(y<0)
+                        y=0;
+                    else if(y>$(this).height()-10)
+                        y=$(this).height()-10;
+                    dialog.css({
+                        left:x,
+                        top:y
+                    });
+                }
+            }).mouseup(function(e){
+                movable = false;
+            });
+        },
         show: function (){
             this.$ele.addClass('YesModal-on');
             this.modal.fadeIn();
@@ -614,24 +645,34 @@
     };
 
     //在插件中使用对象YesModal
-    $.fn.YesModal = function(method,options){
-        options = options||{};
-        var modal = new YesModal(this,options);
-        this.data['YesModal'] = modal.init();
+    $.fn.YesModal = function(options,ele){
+        options = options ||{};
+        ele = ele||'body';
+        var modal = new YesModal($(ele),options);
+        modal.init();
+        this.click(function(e){
+            e.preventDefault();
+            if($(this).data('title'))modal.title.html($(this).data('title'));
+            var target = $(this).attr('href')||$(this).data('target');
+            if(target)modal.body.html($(target).show());
+            modal.show();
+        });
         return this;
     };
-    $.YesModal = function(ele,options){
+    $.YesModal = function(options,ele){
+        options = options||{};
         ele = ele||'body';
         var modal = new YesModal($(ele),options);
         return modal.init();
     }
+
 })(jQuery, window, document);
 
 /*
  * YesContextMenu v1.0.1
  * Steven Ye
  * Email: steven_ye@foxmail.com
- * Date: 2016-9-19
+ * Date: 2016-9-20
  */
 
 //自定义右键插件 YesContextMenu

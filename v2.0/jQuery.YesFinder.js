@@ -1,9 +1,9 @@
 /*
- * YesFinder v2.0.2
+ * YesFinder v2.0.3
  * Steven Ye
  * Email: steven_ye@foxmail.com
  * 依赖 YesModal 和 YesContextMenu 插件
- * Date: 2016-9-19
+ * Date: 2016-9-20
  * MIT License
  */
 ;(function($, window, document,undefined) {
@@ -55,7 +55,7 @@
                     e.preventDefault();
                     return false;
                 });
-                this.YesModal = $.YesModal('body',{width:options.width,height:options.height});
+                this.YesModal = $.YesModal({width:options.width,height:options.height});
                 this.YesModal.title.html('YesFinder - Web File Manager');
                 this.YesModal.body.html($finder);
                 this.YesModal.footer.hide();
@@ -97,8 +97,7 @@
                     $finder.find('.fm-body').eq(0).css('height',wh-82);
                 });
             }
-            //this.modal = $finder.YesModal().data['YesModal'];
-            this.modal= $.YesModal($finder);
+            this.modal= $.YesModal({},$finder);
             if(!$finder.YesContextMenu){
                 $finder.find('.fm-body').prepend('<p class="text-center mute">YesFinder缺少YesContextMenu自定义右键插件，部分功能无法使用。</p>');
             }
@@ -206,7 +205,8 @@
                                 {text:'删除目录',action:function(e){that.delete(folder);}},
                                 {footer:'YesFinder v'+that.version}
                             ];
-                            if($(this).YesContextMenu)$(this).YesContextMenu(menuData);
+                            //if($(this).YesContextMenu)$(this).YesContextMenu(menuData);
+                            if($.YesContextMenu)$.YesContextMenu($(this),menuData);
                         });
 
                         function list(data){

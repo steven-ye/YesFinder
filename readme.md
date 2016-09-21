@@ -6,11 +6,11 @@
 
 1. ####功能上的主要改进是可以双击改文件/目录名称，还有就是选项增加了
 
-    modal:true, 
-    delBtn:true,
-    delBtn:function(){
-      //do something
-    }
+        modal:true, 
+        delBtn:true,
+        delBtnClick:function(){
+           //do something
+        }
 
  这使用使用方式更加多样，方便用于不同场景。
 
@@ -59,3 +59,16 @@
 
 
 2016.09.19
+
+--------------------------------------------------
+
+**修改YesModal**
+
+1. 实现窗口可拖拽
+2. 增加插件，方便使用
+
+       $('#YesModal').YesModal();
+
+   *用法可见YesModal.html的DEMO。*
+
+2016.09.21
